@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 
-import { Stack } from "@mantine/core";
+import { Loader, Stack } from "@mantine/core";
 
 import SkinsList from "./components/SkinsList";
 import PageHeader from "./components/PageHeader/PageHeader";
-import { getSkins } from "./services/u-he-webservice/";
+import { getSkins } from "./services/api-service";
 import { SkinItem } from "./types/SkinItem";
 
 import PageFilters from "./components/PageFilters";
@@ -87,20 +87,27 @@ function App() {
 
   return (
     <Stack
+      align="center"
       w={"100%"}
       maw={1200}
       mx={{ base: 10, sm: 20, md: 30 }}
       my={{ base: 40, md: 80 }}
     >
       <PageHeader />
-      <PageFilters
-        availableDevices={availableDevices.current}
-        onDevicesUpdated={handleDevicesUpdated}
-        onSearchTermUpdated={handleSearchUpdated}
-      />
-      <SkinsList
-        skins={filteredSkins.sort((a, b) => a.name.localeCompare(b.name))}
-      />
+      {!allSkins.current.length ? (
+        <Loader />
+      ) : (
+        <>
+          <PageFilters
+            availableDevices={availableDevices.current}
+            onDevicesUpdated={handleDevicesUpdated}
+            onSearchTermUpdated={handleSearchUpdated}
+          />
+          <SkinsList
+            skins={filteredSkins.sort((a, b) => a.name.localeCompare(b.name))}
+          />
+        </>
+      )}
     </Stack>
   );
 }
