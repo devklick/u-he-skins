@@ -9,7 +9,7 @@ interface SkinTableProps {
 function SkinsList({ skins }: SkinTableProps) {
   return (
     <Stack gap={60} w={"100%"}>
-      {skins.map((skin) => (
+      {skins.slice(0, 3).map((skin) => (
         <Skin key={`${skin.device.name}-${skin.name}`} {...skin} />
       ))}
     </Stack>
