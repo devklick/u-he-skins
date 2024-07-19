@@ -1,30 +1,23 @@
-# React + TypeScript + Vite
+<h1 align='center'>
+  U-he Skins
+</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[u-he](https://u-he.com/) create cross platform virtual synthesizers and
+audio effects. They also provide a [page](https://u-he.com/PatchLib/skins.html)
+listing various skins that are available to download and use on their products. The page is a little outdated, and it can be hard to find skins for a particular device.
 
-Currently, two official plugins are available:
+This repository contains the source code for a React application which consumes the data from the linked u-he page and displays it in a more modern and user-friendly way.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### UI Hosting
 
-## Expanding the ESLint configuration
+This application is hosted using Github Pages and can be found at:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+https://devklick.github.io/u-he-skins/
 
-- Configure the top-level `parserOptions` property like this:
+> [!NOTE]  
+> Be patient when loading this page. <br/>
+> The API is hosted using [Render](https://render.com/) 's free tier, so it can be slow to load.
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+### API
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+This application consumes data returned by the API in another repository, [u-he-skins-api](https://github.com/devklick/u-he-skins-api).
