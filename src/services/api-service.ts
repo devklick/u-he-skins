@@ -1,18 +1,14 @@
 import { trimEnd } from "../common/utils/string-utils";
 import { SkinItem } from "../types/SkinItem";
 
-const baseUrl = import.meta.env.VITE_BASE_URL;
+const baseUrl =
+  import.meta.env.MODE === "development" ? "" : import.meta.env.VITE_BASE_URL;
 
 const endpoints = {
   skins: "skins",
 } as const;
 
 function getUrl(endpoint: keyof typeof endpoints) {
-  if (!baseUrl) {
-    throw new Error(
-      "No base API URL found. VITE_BASE_URL environment variable required"
-    );
-  }
   return [trimEnd(baseUrl, "/"), endpoints[endpoint]].join("/");
 }
 

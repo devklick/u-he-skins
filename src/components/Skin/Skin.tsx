@@ -27,7 +27,12 @@ function Skin({
         preview.url &&
         isImagePath(preview.url) && (
           <Carousel.Slide key={i} h={"100%"}>
-            <Image height={"100%"} src={preview.url} alt={preview.name} />
+            <Image
+              height={"100%"}
+              src={preview.url}
+              alt={preview.name}
+              loading="lazy"
+            />
           </Carousel.Slide>
         )
     )
