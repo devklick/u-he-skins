@@ -3,6 +3,15 @@
   flex-direction: column;
   align-items: center;
   margin-bottom: 40px;
+
+  a {
+    &:focus {
+      color: grey;
+    }
+    &:visited {
+      color: grey;
+    }
+  }
 }
 
 .pageDescription {
