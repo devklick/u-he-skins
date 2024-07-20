@@ -10,7 +10,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     env:
-      VITE_BASE_URL: https://u-he-skins-api.onrender.com
+      VITE_BASE_URL: https://u-he-skins-api.vercel.app/api
 
     steps:
       - name: Checkout repo
