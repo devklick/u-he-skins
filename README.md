@@ -14,10 +14,6 @@ This application is hosted using Github Pages and can be found at:
 
 https://devklick.github.io/u-he-skins/
 
-> [!NOTE]  
-> Be patient when loading this page. <br/>
-> The API is hosted using [Render](https://render.com/) 's free tier, so it can be slow to load.
-
 ### API
 
 This application consumes data returned by the API in another repository, [u-he-skins-api](https://github.com/devklick/u-he-skins-api).
