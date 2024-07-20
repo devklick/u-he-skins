@@ -1,20 +1,18 @@
-import { Anchor, Stack, Text, Title } from "@mantine/core";
+import styles from "./PageHeader.module.scss";
 
 interface PageHeaderProps {}
 
 function PageHeader({}: PageHeaderProps) {
   return (
-    <Stack mb={40}>
-      <Title>u-he skins</Title>
-      <Text>
+    <div className={styles.pageHeader}>
+      <h1>u-he skins</h1>
+      <p className={styles.pageDescription}>
         A filterable adaptation of the{" "}
-        <Anchor href="https://u-he.com/PatchLib/skins.html">
-          original page
-        </Anchor>{" "}
-        listing themes for the virtual synthesizers and effects created by{" "}
-        <Anchor href="https://u-he.com/">u-he</Anchor>
-      </Text>
-    </Stack>
+        <a href="https://u-he.com/PatchLib/skins.html">original page</a> listing
+        themes for the virtual synthesizers and effects created by{" "}
+        <a href="https://u-he.com/">u-he</a>
+      </p>
+    </div>
   );
 }
 

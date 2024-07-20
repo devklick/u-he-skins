@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import { Loader, Stack } from "@mantine/core";
+import { Loader } from "@mantine/core";
 
 import SkinsList from "./components/SkinsList";
 import PageHeader from "./components/PageHeader/PageHeader";
@@ -11,7 +11,7 @@ import PageFilters from "./components/PageFilters";
 
 import "@mantine/core/styles.css";
 import "@mantine/carousel/styles.css";
-import "./App.css";
+import styles from "./App.module.scss";
 
 function sortSkins(skins: Array<SkinItem>) {
   return skins.sort((a, b) => {
@@ -67,7 +67,7 @@ function App() {
     if (searchTerm) candidates = filterSearchTerm(candidates, searchTerm);
     candidates = filterDevices(candidates, selectedDevices);
 
-    setFilteredSkins(candidates);
+    setFilteredSkins(sortSkins(candidates));
   }
 
   function filterSearchTerm(candidates: Array<SkinItem>, searchTerm: string) {
@@ -86,13 +86,7 @@ function App() {
   }
 
   return (
-    <Stack
-      align="center"
-      w={"100%"}
-      maw={1200}
-      mx={{ base: 10, sm: 20, md: 30 }}
-      my={{ base: 40, md: 80 }}
-    >
+    <div className={styles.appContainer}>
       <PageHeader />
       {!allSkins.current.length ? (
         <Loader />
@@ -108,7 +102,7 @@ function App() {
           />
         </>
       )}
-    </Stack>
+    </div>
   );
 }
 

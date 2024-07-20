@@ -1,6 +1,7 @@
-import { Stack } from "@mantine/core";
 import { SkinItem } from "../../types/SkinItem";
 import Skin from "../Skin";
+
+import styles from "./SkinsList.module.scss";
 
 interface SkinTableProps {
   skins: Array<SkinItem>;
@@ -8,11 +9,11 @@ interface SkinTableProps {
 
 function SkinsList({ skins }: SkinTableProps) {
   return (
-    <Stack gap={60} w={"100%"}>
+    <div className={styles.skinsList}>
       {skins.map((skin) => (
         <Skin key={`${skin.device.name}-${skin.name}`} {...skin} />
       ))}
-    </Stack>
+    </div>
   );
 }
 
