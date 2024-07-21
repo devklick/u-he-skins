@@ -1,11 +1,10 @@
-import { Carousel } from "@mantine/carousel";
-import { useDisclosure } from "@mantine/hooks";
-import { Group, Stack, Image, Card } from "@mantine/core";
-
 import { SkinItem } from "../../types/SkinItem";
 import InfoToggle from "../InfoToggle";
 import SkinInfo from "../SkinInfo";
 import { isImagePath } from "../../common/utils/string-utils";
+
+import styles from "./Skin.module.scss";
+import useToggle from "../../common/hooks/useToggle";
 
 interface SkinProps extends SkinItem {}
 
@@ -17,73 +16,29 @@ function Skin({
   name,
   previews,
 }: SkinProps) {
-  const [showInfo, { toggle: toggleShowInfo }] = useDisclosure(true);
-  const enableControls = previews.length > 1;
+  const [showInfo, { toggle: toggleShowInfo }] = useToggle(true);
   const hasImages = previews.some((p) => p.url && isImagePath(p.url));
 
-  const slides = hasImages ? (
-    previews.map(
-      (preview, i) =>
-        preview.url &&
-        isImagePath(preview.url) && (
-          <Carousel.Slide key={i} h={"100%"}>
-            <Image
-              height={"100%"}
-              src={preview.url}
-              alt={preview.name}
-              loading="lazy"
-            />
-          </Carousel.Slide>
-        )
-    )
-  ) : (
-    <Carousel.Slide h={"100%"}></Carousel.Slide>
-  );
-
-  const carousel = (
-    <Carousel
-      withControls={enableControls}
-      h={"100%"}
-      controlsOffset={25}
-      controlSize={25}
-    >
-      {slides}
-    </Carousel>
-  );
-
   return (
-    <Card
-      p={0}
-      radius="md"
-      withBorder
-      pos={"relative"}
-      h={{ base: 300, xs: 300, sm: 500, xl: 600 }}
-    >
-      {carousel}
+    <div className={styles.skinContainer}>
+      <div className={styles.imageContainer}>
+        {/* TODO: Consider creating a carousel or giving some way to view multiple images */}
+        {hasImages && (
+          <img className={styles.skinImage} src={previews[0].url} />
+        )}
+      </div>
 
-      <Stack
-        pos={"absolute"}
-        justify="end"
-        align="center"
-        w={"100%"}
-        h={"100%"}
-        p={{ base: 5, xs: 20, sm: 30 }}
-      >
-        <Group
-          justify="center"
-          align="end"
-          h={"100%"}
-          w={{ base: "100%", sm: "70%", lg: "50%" }}
-        >
+      <div className={styles.skinInfoContainerWrapper}>
+        <div className={styles.skinInfoContainer}>
           {showInfo && (
             <SkinInfo
               {...{ author, description, device, downloads, name, previews }}
             />
           )}
-        </Group>
+        </div>
         <InfoToggle handleClick={toggleShowInfo}></InfoToggle>
-      </Stack>
-    </Card>
+      </div>
+    </div>
   );
 }
 export default Skin;

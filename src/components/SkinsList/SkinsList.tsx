@@ -10,9 +10,11 @@ interface SkinTableProps {
 function SkinsList({ skins }: SkinTableProps) {
   return (
     <div className={styles.skinsList}>
-      {skins.map((skin) => (
-        <Skin key={`${skin.device.name}-${skin.name}`} {...skin} />
-      ))}
+      {skins
+        .slice(0, import.meta.env.VITE_SKINS_COUNT_LIMIT ?? skins.length)
+        .map((skin) => (
+          <Skin key={`${skin.device.name}-${skin.name}`} {...skin} />
+        ))}
     </div>
   );
 }
