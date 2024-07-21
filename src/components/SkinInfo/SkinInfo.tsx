@@ -1,14 +1,8 @@
-import {
-  ActionIcon,
-  Anchor,
-  Group,
-  MantineStyleProp,
-  Stack,
-  StackProps,
-  Text,
-} from "@mantine/core";
-import { SkinItem, SrcItem } from "../../types/SkinItem";
 import { IconDownload, IconPhoto } from "@tabler/icons-react";
+import { SkinItem, SrcItem } from "../../types/SkinItem";
+import ActionButton from "../ActionButton";
+
+import styles from "./SkinInfo.module.scss";
 
 interface SkinInfoProps extends SkinItem {}
 
@@ -17,27 +11,19 @@ function getActionIcons(type: "download" | "image", srcItems: Array<SrcItem>) {
     if (!url) return;
     const style = { color: "grey" };
     return (
-      <ActionIcon
-        key={`${type}-${i}`}
-        variant="transparent"
-        onClick={() => window.open(url)}
-      >
+      <ActionButton key={`${type}-${i}`} handleClick={() => window.open(url)}>
         {type === "download" ? (
           <IconDownload {...style} />
         ) : (
           <IconPhoto {...style} />
         )}
-      </ActionIcon>
+      </ActionButton>
     );
   });
 }
 
 function tryAnchor(srcItem: SrcItem) {
-  return srcItem.url ? (
-    <Anchor href={srcItem.url}>{srcItem.name}</Anchor>
-  ) : (
-    srcItem.name
-  );
+  return srcItem.url ? <a href={srcItem.url}>{srcItem.name}</a> : srcItem.name;
 }
 
 function SkinInfo({
@@ -48,51 +34,31 @@ function SkinInfo({
   name,
   previews,
 }: SkinInfoProps) {
-  const stackStyle: MantineStyleProp = {
-    backgroundColor: "transparent",
-    backdropFilter: "blur(20px) brightness(80%)",
-    borderRadius: 20,
-    border: "1px solid grey",
-  };
-  const stackProps: StackProps = {
-    w: "100%",
-    h: { base: "80%", sm: "50%" },
-    px: { base: 25, md: 40 },
-    pt: { base: 20 },
-    pb: { base: 10 },
-    gap: 0,
-    style: stackStyle,
-  };
   const header = (
-    <Group gap={5}>
-      <Text size="xl">{name}</Text>
-      <Text>
+    <div className={styles.headerContainer}>
+      <span className={styles.primaryHeader}>{name}</span>
+      <span className={styles.secondaryHeader}>
         {tryAnchor(device)} theme by {tryAnchor(author)}
-      </Text>
-    </Group>
+      </span>
+    </div>
   );
   const descriptionBox = (
-    <Group
-      h={"100%"}
-      justify="center"
-      align="center"
-      style={{ overflow: "auto" }}
-    >
-      <Text>{description}</Text>
-    </Group>
+    <div className={styles.descriptionContainer}>
+      <span className={styles.description}>{description}</span>
+    </div>
   );
   const iconsElements = (
-    <Group>
+    <div className={styles.iconContainer}>
       {getActionIcons("image", previews)}
       {getActionIcons("download", downloads)}
-    </Group>
+    </div>
   );
   return (
-    <Stack {...stackProps}>
+    <div className={styles.skinInfo}>
       {header}
       {descriptionBox}
       {iconsElements}
-    </Stack>
+    </div>
   );
 }
 export default SkinInfo;

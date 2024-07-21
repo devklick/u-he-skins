@@ -1,14 +1,13 @@
-.infoToggle {
-  height: 40px;
-  width: 40px;
+.infoToggleActionButton {
   position: absolute;
   right: 10px;
   top: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid grey;
-  border-radius: 7px;
-  backdrop-filter: blur(5px);
-  cursor: pointer;
+
+  &:active {
+    backdrop-filter: blur(5px) brightness(80%);
+    .infoToggleIcon {
+      margin-top: 2px;
+      margin-left: 2px;
+    }
+  }
 }

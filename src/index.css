@@ -4,3 +4,20 @@
   display: flex;
   justify-content: center;
 }
+
+
+a {
+  color: grey;
+  
+  &:focus {
+    color: grey;
+  }
+
+  &:visited {
+    color: grey;
+  }
+
+  &:hover {
+    color: white;
+  }
+}

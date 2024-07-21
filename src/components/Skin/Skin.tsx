@@ -2,9 +2,9 @@ import { SkinItem } from "../../types/SkinItem";
 import InfoToggle from "../InfoToggle";
 import SkinInfo from "../SkinInfo";
 import { isImagePath } from "../../common/utils/string-utils";
+import useToggle from "../../common/hooks/useToggle";
 
 import styles from "./Skin.module.scss";
-import useToggle from "../../common/hooks/useToggle";
 
 interface SkinProps extends SkinItem {}
 
