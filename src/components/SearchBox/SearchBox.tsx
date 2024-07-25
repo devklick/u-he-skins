@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from "react";
 
-import { ActionIcon, TextInput } from "@mantine/core";
 import { IconBackspace } from "@tabler/icons-react";
+
+import Input from "../Input";
+import ActionButton from "../ActionButton";
 
 interface SearchBoxProps {
   onSearchTermUpdated(searchTerm: string | undefined): void;
   placeholder?: string;
+  onFocus?: () => void;
+  onBlur?: () => void;
 }
 
-function SearchBox({ onSearchTermUpdated, placeholder }: SearchBoxProps) {
+function SearchBox({
+  onSearchTermUpdated,
+  placeholder,
+  onBlur,
+  onFocus,
+}: SearchBoxProps) {
   const [searchTerm, setSearchTerm] = useState<string>("");
 
   useEffect(() => {
@@ -24,19 +33,24 @@ function SearchBox({ onSearchTermUpdated, placeholder }: SearchBoxProps) {
   }
 
   const clearIcon = (
-    <ActionIcon disabled={!searchTerm} onClick={clearSearchTerm}>
+    <ActionButton handleClick={clearSearchTerm} withBorder={false}>
       <IconBackspace />
-    </ActionIcon>
+    </ActionButton>
   );
 
   return (
-    <TextInput
-      flex={"1 1 auto"}
-      w={"auto"}
-      placeholder={placeholder}
+    <Input
+      midSection={
+        <input
+          type="text"
+          placeholder={placeholder}
+          value={searchTerm}
+          onChange={handleChange}
+          onFocus={onFocus}
+          onBlur={onBlur}
+        />
+      }
       rightSection={clearIcon}
-      value={searchTerm}
-      onChange={handleChange}
     />
   );
 }

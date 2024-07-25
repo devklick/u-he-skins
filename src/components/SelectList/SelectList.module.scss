@@ -1,0 +1,25 @@
+.selectList {
+  flex: 1 1 0;
+  position: relative;
+  display: flex;
+}
+
+.selectListOptionContainer {
+  top: 0;
+  left: 0;
+  margin-top: 20px;
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  background-color: #242424;
+  width: 100%;
+  border: 1px solid grey;
+  border-radius: 7px;
+  max-height: 400px;
+  overflow: auto;
+  padding: 10px;
+}
+
+.selectListOptionContainerPositioning {
+  position: relative;
+}

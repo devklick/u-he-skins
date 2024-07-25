@@ -12,6 +12,7 @@ import PageFilters from "./components/PageFilters";
 import "@mantine/core/styles.css";
 import "@mantine/carousel/styles.css";
 import styles from "./App.module.scss";
+import PageFooter from "./components/PageFooter";
 
 function sortSkins(skins: Array<SkinItem>) {
   return skins.sort((a, b) => {
@@ -23,7 +24,7 @@ function sortSkins(skins: Array<SkinItem>) {
 
 function App() {
   const allSkins = useRef<Array<SkinItem>>([]);
-  const availableDevices = useRef<Array<string>>([]);
+  const allDevices = useRef<Array<string>>([]);
   const searchTerm = useRef<string | undefined>();
   const selectedDevices = useRef<Array<string>>([]);
   const [filteredSkins, setFilteredSkins] = useState<Array<SkinItem>>([]);
@@ -31,7 +32,7 @@ function App() {
   useEffect(() => {
     async function get() {
       allSkins.current = await getSkins();
-      availableDevices.current = Array.from(
+      allDevices.current = Array.from(
         new Set(allSkins.current.map((s) => s.device.name))
       );
       const sortedSkins = sortSkins(allSkins.current);
@@ -93,7 +94,7 @@ function App() {
       ) : (
         <>
           <PageFilters
-            availableDevices={availableDevices.current}
+            availableDevices={allDevices.current}
             onDevicesUpdated={handleDevicesUpdated}
             onSearchTermUpdated={handleSearchUpdated}
           />
@@ -102,6 +103,7 @@ function App() {
           />
         </>
       )}
+      <PageFooter />
     </div>
   );
 }
