@@ -1,0 +1,58 @@
+@import "../../common/styles/global.scss";
+
+.skinContainer {
+  height: 300px;
+  width: 100%;
+  position: relative;
+  border-radius: 7px;
+  border: 1px solid grey;
+  box-shadow: 0 0 20px 1px black;
+
+  @include sm {
+    height: 500px;
+    box-shadow: 0 0 20px 5px black;
+  }
+
+  @include xl {
+    box-shadow: 0 0 30px 8px black;
+  }
+
+  .imageContainer {
+    width: 100%;
+    height: 100%;
+    border-radius: 7px;
+    position: absolute;
+
+    .skinImage {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 7px;
+    }
+  }
+
+  .skinInfoContainerWrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    padding: 5px;
+
+    @include sm {
+      padding: 20px;
+    }
+
+    @include md {
+      padding: 30px;
+    }
+
+    .skinInfoContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: end;
+      height: 100%;
+      width: 100%;
+    }
+  }
+}

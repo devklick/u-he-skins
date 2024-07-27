@@ -1,6 +1,7 @@
-import { Group } from "@mantine/core";
 import SearchBox from "../SearchBox";
 import SelectList from "../SelectList";
+
+import styles from "./PageFilters.module.scss";
 
 interface PageFiltersProps {
   availableDevices: Array<string>;
@@ -14,7 +15,7 @@ function PageFilters({
   onDevicesUpdated,
 }: PageFiltersProps) {
   return (
-    <Group w={"100%"} justify="center">
+    <div className={styles.pageFilters}>
       <SearchBox
         placeholder="Search..."
         onSearchTermUpdated={onSearchTermUpdated}
@@ -24,7 +25,7 @@ function PageFilters({
         options={availableDevices}
         onSelectionUpdated={onDevicesUpdated}
       />
-    </Group>
+    </div>
   );
 }
 

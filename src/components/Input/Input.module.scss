@@ -1,0 +1,36 @@
+.inputContainer {
+  flex: 1 1 0;
+  min-height: 40px;
+  min-width: 0;
+
+  .inputContent {
+    width: 100%;
+    height: 100%;
+    border: 1px solid grey;
+    border-radius: 7px;
+    padding: 0 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    min-width: 0;
+    &:focus-within {
+      border-color: rgb(184, 184, 184);
+      // box-shadow: 0 0px 20px 5px black;
+    }
+    input {
+      flex-grow: 1;
+      background-color: unset;
+      outline: none;
+      border: none;
+      width: auto;
+      height: 100%;
+      color: unset;
+      min-width: 0;
+    }
+
+    svg {
+      color: grey;
+    }
+  }
+}

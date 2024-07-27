@@ -1,0 +1,25 @@
+.actionButton {
+  height: 34px;
+  width: 34px;
+  display: flex;
+  justify-content: center;
+  background-color: unset;
+  align-items: center;
+  border: none;
+  backdrop-filter: blur(5px);
+  border-radius: 7px;
+  cursor: pointer;
+  &:hover {
+    filter: brightness(130%);
+  }
+  &:active {
+    filter: brightness(80%);
+    svg {
+      margin-top: 2px;
+      margin-left: 2px;
+    }
+  }
+  &--bordered {
+    border: 1px solid grey;
+  }
+}

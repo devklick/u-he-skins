@@ -1,0 +1,33 @@
+body {
+  margin: 0;
+  background-color: #222226;
+  color: rgb(206, 206, 206);
+  font-family: "Oxanium";
+}
+*, ::before, ::after {
+  box-sizing: border-box;
+}
+
+#root {
+  margin: 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+
+a {
+  color: grey;
+  
+  &:focus {
+    color: grey;
+  }
+
+  &:visited {
+    color: grey;
+  }
+
+  &:hover {
+    color: white;
+  }
+}
