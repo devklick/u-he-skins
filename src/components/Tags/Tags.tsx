@@ -12,7 +12,7 @@ function Tags({ tags, onDeleteTag }: TagsProps) {
   return (
     <div className={styles.tags}>
       {tags.map((tag) => (
-        <Tag text={tag} onClickDelete={() => onDeleteTag(tag)} />
+        <Tag key={tag} text={tag} onClickDelete={() => onDeleteTag(tag)} />
       ))}
     </div>
   );

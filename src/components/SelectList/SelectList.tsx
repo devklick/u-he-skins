@@ -4,7 +4,7 @@ import styles from "./SelectList.module.scss";
 import useDetectMouseDownOutside from "../../common/hooks/useDetectMouseDownOutside";
 import Input from "../Input";
 import ActionButton from "../ActionButton";
-import { IconBackspace } from "@tabler/icons-react";
+import { IconBackspace, IconCheck } from "@tabler/icons-react";
 import Tags from "../Tags";
 
 interface SelectListProps {
@@ -105,7 +105,8 @@ function SelectList({
                 className={styles.selectListOption}
                 onClick={() => handleOptionClicked(option)}
               >
-                {option}
+                <span>{option}</span>
+                {selected.includes(option) && <IconCheck />}
               </div>
             ))}
         </div>

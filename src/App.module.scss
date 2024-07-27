@@ -6,14 +6,14 @@
   align-items: center;
   width: 100%;
   max-width: 1200px;
-  margin: 0 10px;
+  padding: 0 10px;
   gap: 20px;
 
   @include sm {
-    margin: 0 20px;
+    padding: 0 20px;
   }
 
   @include md {
-    margin: 0 30px;
+    padding: 0 30px;
   }
 }

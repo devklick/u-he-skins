@@ -3,6 +3,10 @@
   right: 10px;
   top: 10px;
 
+  .infoToggleIcon {
+    fill: white;
+  }
+
   &:active {
     backdrop-filter: blur(5px) brightness(80%);
     .infoToggleIcon {

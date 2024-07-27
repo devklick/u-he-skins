@@ -1,12 +1,13 @@
 .actionButton {
-  height: 40px;
-  width: 40px;
+  height: 34px;
+  width: 34px;
   display: flex;
   justify-content: center;
   background-color: unset;
   align-items: center;
   border: none;
   backdrop-filter: blur(5px);
+  border-radius: 7px;
   cursor: pointer;
   &:hover {
     filter: brightness(130%);
@@ -20,6 +21,5 @@
   }
   &--bordered {
     border: 1px solid grey;
-    border-radius: 7px;
   }
 }

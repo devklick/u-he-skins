@@ -5,7 +5,6 @@ interface InputProps {
   leftSection?: React.ReactNode;
   rightSection?: React.ReactNode;
   midSection: React.ReactNode;
-  // ref?: React.RefObject<HTMLDivElement>;
 }
 
 const Input = React.forwardRef<

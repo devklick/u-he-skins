@@ -9,8 +9,6 @@ import { SkinItem } from "./types/SkinItem";
 
 import PageFilters from "./components/PageFilters";
 
-import "@mantine/core/styles.css";
-import "@mantine/carousel/styles.css";
 import styles from "./App.module.scss";
 import PageFooter from "./components/PageFooter";
 
