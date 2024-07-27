@@ -1,7 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 
-import { Loader } from "@mantine/core";
-
 import SkinsList from "./components/SkinsList";
 import PageHeader from "./components/PageHeader/PageHeader";
 import { getSkins } from "./services/api-service";
@@ -11,6 +9,7 @@ import PageFilters from "./components/PageFilters";
 
 import styles from "./App.module.scss";
 import PageFooter from "./components/PageFooter";
+import Loader from "./components/Loader";
 
 function sortSkins(skins: Array<SkinItem>) {
   return skins.sort((a, b) => {
