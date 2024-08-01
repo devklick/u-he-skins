@@ -10,6 +10,7 @@ import PageFilters from "./components/PageFilters";
 import styles from "./App.module.scss";
 import PageFooter from "./components/PageFooter";
 import Loader from "./components/Loader";
+import useScrolledPagination from "./common/hooks/useScrolledPagination";
 
 function sortSkins(skins: Array<SkinItem>) {
   return skins.sort((a, b) => {
@@ -25,6 +26,10 @@ function App() {
   const searchTerm = useRef<string | undefined>();
   const selectedDevices = useRef<Array<string>>([]);
   const [filteredSkins, setFilteredSkins] = useState<Array<SkinItem>>([]);
+  const footerRef = useRef<HTMLDivElement>(null);
+
+  // ideally the pageSize should be determined based on the viewport height and the the item height
+  const [pageData] = useScrolledPagination({items: filteredSkins, observerTarget: footerRef, pageSize: 5 });
 
   useEffect(() => {
     async function get() {
@@ -96,11 +101,11 @@ function App() {
             onSearchTermUpdated={handleSearchUpdated}
           />
           <SkinsList
-            skins={filteredSkins.sort((a, b) => a.name.localeCompare(b.name))}
+            skins={pageData.sort((a, b) => a.name.localeCompare(b.name))}
           />
         </>
       )}
-      <PageFooter />
+      <PageFooter ref={footerRef} />
     </div>
   );
 }
