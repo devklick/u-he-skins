@@ -26,10 +26,14 @@ function App() {
   const searchTerm = useRef<string | undefined>();
   const selectedDevices = useRef<Array<string>>([]);
   const [filteredSkins, setFilteredSkins] = useState<Array<SkinItem>>([]);
-  const footerRef = useRef<HTMLDivElement>(null);
+  const lastItemRef = useRef<HTMLDivElement>(null);
 
   // ideally the pageSize should be determined based on the viewport height and the the item height
-  const [pageData] = useScrolledPagination({items: filteredSkins, observerTarget: footerRef, pageSize: 5 });
+  const [pageData] = useScrolledPagination({
+    items: filteredSkins,
+    observerTarget: lastItemRef,
+    pageSize: 5,
+  });
 
   useEffect(() => {
     async function get() {
@@ -101,11 +105,14 @@ function App() {
             onSearchTermUpdated={handleSearchUpdated}
           />
           <SkinsList
-            skins={pageData.sort((a, b) => a.name.localeCompare(b.name))}
+            skins={pageData.map((item, i) => ({
+              ...item,
+              ref: i === pageData.length - 1 ? lastItemRef : undefined,
+            }))}
           />
         </>
       )}
-      <PageFooter ref={footerRef} />
+      <PageFooter />
     </div>
   );
 }

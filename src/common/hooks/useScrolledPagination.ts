@@ -19,7 +19,7 @@ function useScrolledPagination<Item>({
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [items])
+  }, [items]);
 
   useEffect(() => {
     if (!items.length) return;
@@ -43,7 +43,7 @@ function useScrolledPagination<Item>({
   }, [currentPage, items.length, observerTarget, pageSize]);
 
   const pageData = items.slice(0, currentPage * pageSize);
-  
+
   return [pageData] as const;
 }
 
