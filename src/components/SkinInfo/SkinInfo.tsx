@@ -11,8 +11,8 @@ function getActionIcons(type: "download" | "image", srcItems: Array<SrcItem>) {
     if (!url) return;
     const style = { color: "grey" };
     return (
-      <a href={url} target="_blank">
-        <ActionButton key={`${type}-${i}`}>
+      <a href={url} target="_blank" key={`${type}-${i}`}>
+        <ActionButton>
           {type === "download" ? (
             <IconDownload {...style} />
           ) : (
