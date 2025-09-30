@@ -1,7 +1,7 @@
 import styles from "./ActionButton.module.scss";
 
 interface ActionButtonProps {
-  handleClick(): void;
+  handleClick?(): void;
   className?: string;
   withBorder?: boolean;
 }

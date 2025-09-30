@@ -11,13 +11,15 @@ function getActionIcons(type: "download" | "image", srcItems: Array<SrcItem>) {
     if (!url) return;
     const style = { color: "grey" };
     return (
-      <ActionButton key={`${type}-${i}`} handleClick={() => window.open(url)}>
-        {type === "download" ? (
-          <IconDownload {...style} />
-        ) : (
-          <IconPhoto {...style} />
-        )}
-      </ActionButton>
+      <a href={url} target="_blank">
+        <ActionButton key={`${type}-${i}`}>
+          {type === "download" ? (
+            <IconDownload {...style} />
+          ) : (
+            <IconPhoto {...style} />
+          )}
+        </ActionButton>
+      </a>
     );
   });
 }
