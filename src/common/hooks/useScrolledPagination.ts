@@ -1,21 +1,23 @@
-import React, { useEffect, useState } from "react";
+import { RefObject, useEffect, useRef, useState } from "react";
 
 interface ScrolledPaginationProps<Item> {
   items: Array<Item>;
-  observerTarget: React.RefObject<HTMLDivElement>;
   pageSize: number;
   initialPageNumber?: number;
 }
 
-type ScrolledPaginationResult<Item> = [Array<Item>];
+interface ScrolledPaginationResult<Item> {
+  pageData: Array<Item>;
+  observerTarget: RefObject<HTMLDivElement>;
+}
 
 function useScrolledPagination<Item>({
   items,
-  observerTarget,
   pageSize,
   initialPageNumber = 1,
 }: ScrolledPaginationProps<Item>): ScrolledPaginationResult<Item> {
   const [currentPage, setCurrentPage] = useState(initialPageNumber);
+  const observerTarget = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -44,7 +46,7 @@ function useScrolledPagination<Item>({
 
   const pageData = items.slice(0, currentPage * pageSize);
 
-  return [pageData] as const;
+  return { pageData, observerTarget } as const;
 }
 
 export default useScrolledPagination;

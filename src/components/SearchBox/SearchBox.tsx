@@ -7,6 +7,7 @@ import ActionButton from "../ActionButton";
 
 interface SearchBoxProps {
   onSearchTermUpdated(searchTerm: string | undefined): void;
+  value?: string | null;
   placeholder?: string;
   onFocus?: () => void;
   onBlur?: () => void;
@@ -17,12 +18,16 @@ function SearchBox({
   placeholder,
   onBlur,
   onFocus,
+  value,
 }: SearchBoxProps) {
-  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [searchTerm, setSearchTerm] = useState<string>(value ?? "");
+  useEffect(() => {
+    setSearchTerm(value ?? "");
+  }, [value]);
 
   useEffect(() => {
     onSearchTermUpdated(searchTerm);
-  }, [searchTerm]);
+  }, [onSearchTermUpdated, searchTerm]);
 
   function clearSearchTerm() {
     setSearchTerm("");

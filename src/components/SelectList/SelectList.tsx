@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import styles from "./SelectList.module.scss";
 import useDetectMouseDownOutside from "../../common/hooks/useDetectMouseDownOutside";
@@ -11,20 +11,26 @@ interface SelectListProps {
   placeholder?: string;
   options: Array<string>;
   onSelectionUpdated(selected: Array<string>): void;
+  value?: Array<string>;
 }
 
 function SelectList({
   onSelectionUpdated,
   options,
   placeholder,
+  value,
 }: SelectListProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [selected, setSelected] = useState<Array<string>>([]);
+  const [selected, setSelected] = useState<Array<string>>(value ?? []);
   const [searchTerm, setSearchTerm] = useState("");
   const [focused, setFocused] = useState(false);
   const [matchingOptions, setMatchingOptions] = useState<Array<string>>([
     ...options,
   ]);
+
+  useEffect(() => {
+    setSelected(value ?? []);
+  }, [value]);
 
   function handleSearchUpdated(search: string | undefined) {
     if (!search) setMatchingOptions(options);
