@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useRef, useState } from "react";
+import { Ref, useCallback, useEffect, useRef, useState } from "react";
 
 interface ScrolledPaginationProps<Item> {
   items: Array<Item>;
@@ -8,7 +8,7 @@ interface ScrolledPaginationProps<Item> {
 
 interface ScrolledPaginationResult<Item> {
   pageData: Array<Item>;
-  observerTarget: RefObject<HTMLDivElement>;
+  observerTarget: Ref<HTMLDivElement>;
 }
 
 function useScrolledPagination<Item>({
@@ -17,36 +17,40 @@ function useScrolledPagination<Item>({
   initialPageNumber = 1,
 }: ScrolledPaginationProps<Item>): ScrolledPaginationResult<Item> {
   const [currentPage, setCurrentPage] = useState(initialPageNumber);
-  const observerTarget = useRef<HTMLDivElement>(null);
+  const observer = useRef<IntersectionObserver | null>(null);
+
+  const buildPage = useCallback(() => {
+    const nextPage = currentPage + 1;
+    const maxPage = Math.ceil(items.length / pageSize);
+    if (nextPage > maxPage) return;
+    setCurrentPage(nextPage);
+  }, [currentPage, items.length, pageSize]);
+
+  const observerTargetCallback = useCallback(
+    (node: null | HTMLDivElement) => {
+      if (observer.current) {
+        observer.current.disconnect();
+      }
+      observer.current = new IntersectionObserver(([{ isIntersecting }]) => {
+        if (!isIntersecting) return;
+        buildPage();
+      });
+
+      if (node) {
+        observer.current.disconnect();
+        observer.current.observe(node);
+      }
+    },
+    [buildPage],
+  );
 
   useEffect(() => {
     setCurrentPage(1);
   }, [items]);
 
-  useEffect(() => {
-    if (!items.length) return;
-
-    const observer = new IntersectionObserver(([{ isIntersecting }]) => {
-      if (!isIntersecting) return;
-      const nextPage = currentPage + 1;
-      const maxPage = Math.ceil(items.length / pageSize);
-      if (nextPage > maxPage) return;
-      setCurrentPage(nextPage);
-    });
-    const currentObserverTarget = observerTarget.current;
-    if (currentObserverTarget) {
-      observer.observe(currentObserverTarget);
-    }
-    return () => {
-      if (currentObserverTarget) {
-        observer.unobserve(currentObserverTarget);
-      }
-    };
-  }, [currentPage, items.length, observerTarget, pageSize]);
-
   const pageData = items.slice(0, currentPage * pageSize);
 
-  return { pageData, observerTarget } as const;
+  return { pageData, observerTarget: observerTargetCallback } as const;
 }
 
 export default useScrolledPagination;

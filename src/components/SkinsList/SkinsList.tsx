@@ -1,11 +1,11 @@
-import React from "react";
+import { Ref } from "react";
 import { SkinItem } from "../../types/SkinItem";
 import Skin from "../Skin";
 
 import styles from "./SkinsList.module.scss";
 
 interface SkinTableProps {
-  skins: Array<SkinItem & { ref?: React.RefObject<HTMLDivElement> }>;
+  skins: Array<SkinItem & { ref?: Ref<HTMLDivElement> }>;
 }
 
 function SkinsList({ skins }: SkinTableProps) {
