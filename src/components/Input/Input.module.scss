@@ -14,9 +14,11 @@
     justify-content: center;
     align-items: center;
     min-width: 0;
+    background-color: rgba(32, 32, 36, 0.431372549);
+    box-shadow: 0 0 12px 2px black;
+    backdrop-filter: blur(20px);
     &:focus-within {
       border-color: rgb(184, 184, 184);
-      // box-shadow: 0 0px 20px 5px black;
     }
     input {
       flex-grow: 1;

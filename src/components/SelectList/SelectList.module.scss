@@ -12,12 +12,16 @@
   position: absolute;
   z-index: 10;
   width: 100%;
-  background-color: #222226;
-  box-shadow: 0 0 20px 5px black;
+  /* background-color: #222226; */
+  /* box-shadow: 0 0 20px 5px black; */
   border: 1px solid grey;
   border-radius: 7px;
   max-height: 400px;
   overflow: auto;
+
+  background-color: rgba(32, 32, 36, 0.431372549);
+  box-shadow: 0 0 12px 2px black;
+  backdrop-filter: blur(20px);
 
   .selectListOption {
     box-sizing: border-box;

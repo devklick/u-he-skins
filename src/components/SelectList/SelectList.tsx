@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
+import { IconBackspace, IconCheck } from "@tabler/icons-react";
 
-import styles from "./SelectList.module.scss";
 import useDetectMouseDownOutside from "../../common/hooks/useDetectMouseDownOutside";
 import Input from "../Input";
 import ActionButton from "../ActionButton";
-import { IconBackspace, IconCheck } from "@tabler/icons-react";
 import Tags from "../Tags";
+
+import styles from "./SelectList.module.scss";
 
 interface SelectListProps {
   placeholder?: string;
@@ -20,7 +21,8 @@ function SelectList({
   placeholder,
   value,
 }: SelectListProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const [selected, setSelected] = useState<Array<string>>(value ?? []);
   const [searchTerm, setSearchTerm] = useState("");
   const [focused, setFocused] = useState(false);
@@ -36,7 +38,7 @@ function SelectList({
     if (!search) setMatchingOptions(options);
     else
       setMatchingOptions(
-        options.filter((o) => o.toUpperCase().includes(search.toUpperCase()))
+        options.filter((o) => o.toUpperCase().includes(search.toUpperCase())),
       );
     setSearchTerm(search ?? "");
   }
@@ -44,6 +46,18 @@ function SelectList({
   useDetectMouseDownOutside({
     elementRef: containerRef,
     onMouseDown: () => setFocused(false),
+  });
+
+  useEffect(() => {
+    const handler = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && focused) {
+        inputRef.current?.blur();
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => {
+      window.removeEventListener("keydown", handler);
+    };
   });
 
   function selectOption(option: string) {
@@ -89,11 +103,15 @@ function SelectList({
       }
       midSection={
         <input
+          ref={inputRef}
           type="text"
           placeholder={selected.length ? undefined : placeholder}
           value={searchTerm}
           onChange={(e) => handleSearchUpdated(e.currentTarget.value)}
           onFocus={() => setFocused(true)}
+          onClick={() => setFocused(true)}
+          onKeyDown={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
         />
       }
       rightSection={clearIcon}

@@ -6,7 +6,7 @@ interface UseDetectMouseDownOutsideProps<Element extends HTMLElement> {
    * Clicks on any parents of this element will trigger the callback.
    * Clicking this element or any of it's children will not trigger the callback.
    */
-  elementRef: React.RefObject<Element>;
+  elementRef: React.RefObject<Element | null>;
 
   /**
    * The callback to be invoked when a mouse down
