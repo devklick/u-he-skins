@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import { useQuery } from "@tanstack/react-query";
 import { trimEnd } from "../common/utils/string-utils";
 import { SkinItem } from "../types/SkinItem";
 import { useEffect, useRef, useState } from "react";

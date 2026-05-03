@@ -1,4 +1,4 @@
-@import "../../common/styles/global.scss";
+@use "../../common/styles/global.scss" as *;
 
 .skinInfo {
   display: flex;
