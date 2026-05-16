@@ -1,4 +1,5 @@
-@use "../../common/styles/global.scss" as *;
+@use "~/common/styles/global" as *;
+@use "~/common/styles/variables" as *;
 
 .skinContainer {
   height: 300px;
@@ -6,15 +7,15 @@
   position: relative;
   border-radius: 7px;
   border: 1px solid grey;
-  box-shadow: 0 0 20px 1px black;
+  box-shadow: 0 0 20px 1px var(--color-shadow);
 
   @include sm {
     height: 500px;
-    box-shadow: 0 0 20px 5px black;
+    box-shadow: 0 0 20px 5px var(--color-shadow);
   }
 
   @include xl {
-    box-shadow: 0 0 30px 8px black;
+    box-shadow: 0 0 30px 8px var(--color-shadow);
   }
 
   .imageContainer {
@@ -36,14 +37,14 @@
     flex-direction: column;
     height: 100%;
     width: 100%;
-    padding: 5px;
+    padding: $spacing-sm;
 
     @include sm {
-      padding: 20px;
+      padding: $spacing-lg;
     }
 
     @include md {
-      padding: 30px;
+      padding: $spacing-xl;
     }
 
     .skinInfoContainer {

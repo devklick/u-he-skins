@@ -1,11 +1,25 @@
+@use "~/common/styles/global" as *;
+@use "~/common/styles/variables" as *;
+
 .pageFilters {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
+  gap: $spacing-md;
   width: 100%;
-  gap: 20px;
+  transition: transform 0.3s ease;
 
-  position: sticky;
-  top: 20px;
-  z-index: 1;
+  &--stuck {
+    position: sticky;
+    top: $spacing-md;
+    z-index: 1;
+  }
+
+  &--hidden {
+    transform: translateY(calc(-100% * 2));
+  }
+
+  @include sm {
+    flex-direction: row;
+  }
 }

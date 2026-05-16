@@ -1,7 +1,7 @@
 body {
   margin: 0;
-  background-color: #222226;
-  color: rgb(206, 206, 206);
+  background-color: var(--color-bg);
+  color: var(--color-text);
   font-family: "Oxanium";
 }
 *, ::before, ::after {

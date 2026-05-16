@@ -4,6 +4,7 @@ import { IconBackspace } from "@tabler/icons-react";
 
 import Input from "../Input";
 import ActionButton from "../ActionButton";
+import styles from "./SearchBox.module.scss";
 
 interface SearchBoxProps {
   onSearchTermUpdated(searchTerm: string | undefined): void;
@@ -47,6 +48,7 @@ function SearchBox({
     <Input
       midSection={
         <input
+          className={styles.searchBox}
           type="text"
           placeholder={placeholder}
           value={searchTerm}

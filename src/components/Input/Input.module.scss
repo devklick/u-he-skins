@@ -1,21 +1,27 @@
+@use "~/common/styles/variables" as *;
+@use "~/common/styles/global" as *;
+
 .inputContainer {
-  flex: 1 1 0;
+  flex: 1 1 1;
   min-height: 40px;
   min-width: 0;
 
+  @include sm {
+    flex: 1 1 0;
+  }
+
   .inputContent {
     width: 100%;
-    height: 100%;
     border: 1px solid grey;
     border-radius: 7px;
-    padding: 0 10px;
+    padding: $spacing-sm;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     min-width: 0;
-    background-color: rgba(32, 32, 36, 0.431372549);
-    box-shadow: 0 0 12px 2px black;
+    background-color: var(--color-opaque);
+    box-shadow: 0 0 12px 2px var(--color-shadow);
     backdrop-filter: blur(20px);
     &:focus-within {
       border-color: rgb(184, 184, 184);

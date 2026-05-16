@@ -1,0 +1,56 @@
+@use "~/common/styles/global.scss" as *;
+@use "~/common/styles/variables.scss" as *;
+
+.themeToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  padding: 0;
+  border: none;
+  background: none;
+
+  position: absolute;
+  top: $spacing-md;
+  right: $spacing-md;
+
+  &__icon {
+    font-size: 1rem;
+    line-height: 1;
+    color: var(--color-text);
+  }
+
+  &__track {
+    cursor: pointer;
+    position: relative;
+
+    width: 48px;
+    height: 24px;
+
+    border-radius: 999px;
+
+    background: var(--color-primary);
+  }
+
+  &__thumb {
+    position: absolute;
+
+    width: 18px;
+    height: 18px;
+
+    top: 3px;
+    left: 3px;
+
+    border-radius: 50%;
+
+    background: var(--color-text);
+
+    transition: transform 0.25s ease;
+  }
+
+  &--dark {
+    .themeToggle__thumb {
+      transform: translateX(24px);
+    }
+  }
+}

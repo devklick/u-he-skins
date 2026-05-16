@@ -1,9 +1,11 @@
+@use "~/common/styles/variables" as *;
+
 .infoToggleActionButton {
   position: absolute;
-  right: 10px;
-  top: 10px;
-  box-shadow: 0 0px 20px 5px black;
-  background-color: #2020246e;
+  right: $spacing-md;
+  top: $spacing-md;
+  box-shadow: 0 0px 20px 5px var(--color-shadow);
+  background-color: var(--color-opaque);
 
   .infoToggleIcon {
     fill: white;
@@ -12,8 +14,8 @@
   &:active {
     backdrop-filter: blur(5px) brightness(80%);
     .infoToggleIcon {
-      margin-top: 2px;
-      margin-left: 2px;
+      margin-top: $spacing-xs;
+      margin-left: $spacing-xs;
     }
   }
 }

@@ -35,11 +35,15 @@ function SelectList({
   }, [value]);
 
   function handleSearchUpdated(search: string | undefined) {
-    if (!search) setMatchingOptions(options);
-    else
+    console.log("search updated", search);
+    if (!search) {
+      setMatchingOptions(options);
+    } else {
       setMatchingOptions(
         options.filter((o) => o.toUpperCase().includes(search.toUpperCase())),
       );
+    }
+
     setSearchTerm(search ?? "");
   }
 
@@ -50,8 +54,8 @@ function SelectList({
 
   useEffect(() => {
     const handler = (event: KeyboardEvent) => {
-      if (event.key === "Escape" && focused) {
-        inputRef.current?.blur();
+      if ((focused && event.key === "Escape") || event.key === "Tab") {
+        setFocused(false);
       }
     };
     window.addEventListener("keydown", handler);
@@ -98,21 +102,21 @@ function SelectList({
   return (
     <Input
       ref={containerRef}
-      leftSection={
-        <Tags tags={selected} onDeleteTag={(tag) => deselectOption(tag)} />
-      }
+      // leftSection={}
       midSection={
-        <input
-          ref={inputRef}
-          type="text"
-          placeholder={selected.length ? undefined : placeholder}
-          value={searchTerm}
-          onChange={(e) => handleSearchUpdated(e.currentTarget.value)}
-          onFocus={() => setFocused(true)}
-          onClick={() => setFocused(true)}
-          onKeyDown={() => setFocused(true)}
-          onBlur={() => setFocused(false)}
-        />
+        <div className={styles.selectListContent}>
+          <input
+            ref={inputRef}
+            type="text"
+            placeholder={selected.length ? undefined : placeholder}
+            value={searchTerm}
+            onChange={(e) => handleSearchUpdated(e.currentTarget.value)}
+            onFocus={() => setFocused(true)}
+            onClick={() => setFocused(true)}
+            onKeyDown={() => setFocused(true)}
+          />
+          <Tags tags={selected} onDeleteTag={(tag) => deselectOption(tag)} />
+        </div>
       }
       rightSection={clearIcon}
     >
@@ -130,7 +134,9 @@ function SelectList({
                 onClick={() => handleOptionClicked(option)}
               >
                 <span>{option}</span>
-                {selected.includes(option) && <IconCheck />}
+                {selected.includes(option) && (
+                  <IconCheck className={styles.selectListOpenChecked} />
+                )}
               </div>
             ))}
         </div>
