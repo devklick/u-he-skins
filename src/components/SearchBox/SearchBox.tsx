@@ -39,7 +39,7 @@ function SearchBox({
   }
 
   const clearIcon = (
-    <ActionButton handleClick={clearSearchTerm} withBorder={false}>
+    <ActionButton handleClick={clearSearchTerm} withBorder>
       <IconBackspace />
     </ActionButton>
   );

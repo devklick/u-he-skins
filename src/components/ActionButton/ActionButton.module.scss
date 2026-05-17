@@ -1,21 +1,34 @@
-.actionButton {
+.actionButtonContainer {
   height: 34px;
   width: 34px;
+  border-radius: 12%;
+  backdrop-filter: blur(5px);
+  background-color: var(--color-opaque);
+}
+
+.actionButton {
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   background-color: unset;
   align-items: center;
   border: none;
-  backdrop-filter: blur(1px);
-  border-radius: 7px;
+  border-radius: 12%;
   cursor: pointer;
-  &:hover {
-    filter: brightness(130%);
+  mix-blend-mode: color;
+
+  svg {
+    color: var(--color-primary);
+    stroke: var(--color-primary);
   }
+
+  &:hover,
   &:active {
-    filter: brightness(130%);
+    mix-blend-mode: color-burn;
   }
+
   &--bordered {
-    border: 1px solid grey;
+    border: 1px solid var(--color-primary);
   }
 }

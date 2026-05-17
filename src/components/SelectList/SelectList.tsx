@@ -100,12 +100,12 @@ const SelectList = forwardRef<SelectListHandles, SelectListProps>(
 
     const clearIcon = (
       <ActionButton
+        withBorder
         handleClick={() => {
           setSearchTerm("");
           setSelected([]);
           onSelectionUpdated([]);
         }}
-        withBorder={false}
       >
         <IconBackspace />
       </ActionButton>
