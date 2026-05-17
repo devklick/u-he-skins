@@ -5,10 +5,10 @@ interface PageHeaderProps {}
 
 function PageHeader({}: PageHeaderProps) {
   return (
-    <div className={styles.pageHeader}>
+    <div className={styles["page-header"]}>
       <ThemeToggle />
       <h1>u-he skins</h1>
-      <p className={styles.pageDescription}>
+      <p>
         A filterable adaptation of the{" "}
         <a href="https://u-he.com/PatchLib/skins.html">original page</a> listing
         themes for the virtual synthesizers and effects created by{" "}

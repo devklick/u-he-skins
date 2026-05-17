@@ -1,16 +1,18 @@
 @use "~/common/styles/variables" as *;
 @use "~/common/styles/global" as *;
 
-.inputContainer {
-  flex: 1 1 1;
-  min-height: 40px;
-  min-width: 0;
+.input {
+  &__container {
+    flex: 1 1 1;
+    min-height: 40px;
+    min-width: 0;
 
-  @include sm {
-    flex: 1 1 0;
+    @include sm {
+      flex: 1 1 0;
+    }
   }
 
-  .inputContent {
+  &__content {
     width: 100%;
     border: 1px solid grey;
     border-radius: 7px;
@@ -23,9 +25,11 @@
     background-color: var(--color-opaque);
     box-shadow: 0 0 12px 2px var(--color-shadow);
     backdrop-filter: blur(20px);
+
     &:focus-within {
-      border-color: rgb(184, 184, 184);
+      border-color: var(--color-primary);
     }
+
     input {
       flex-grow: 1;
       background-color: unset;

@@ -65,9 +65,9 @@ function PageFilters({
     <>
       <div ref={triggerRef} />
       <div
-        className={clsx(styles.pageFilters, {
-          [styles["pageFilters--stuck"]]: stuck,
-          [styles["pageFilters--hidden"]]: stuck && hidden,
+        className={clsx(styles["page-filters"], {
+          [styles["page-filters--stuck"]]: stuck,
+          [styles["page-filters--hidden"]]: stuck && hidden,
         })}
         ref={pageFiltersRef}
       >

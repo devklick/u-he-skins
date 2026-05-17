@@ -12,8 +12,8 @@ const Input = React.forwardRef<
   React.PropsWithChildren<InputProps>
 >(({ midSection, leftSection, rightSection, children }, ref) => {
   return (
-    <div className={styles.inputContainer} ref={ref}>
-      <div className={styles.inputContent}>
+    <div className={styles["input__container"]} ref={ref}>
+      <div className={styles["input__content"]}>
         {leftSection}
         {midSection}
         {rightSection}

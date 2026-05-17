@@ -1,6 +1,6 @@
 @use "~/common/styles/variables.scss" as *;
 
-.pageHeader {
+.page-header {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,7 +8,4 @@
   position: relative;
   margin-top: $spacing-md;
   width: 100%;
-}
-
-.pageDescription {
 }

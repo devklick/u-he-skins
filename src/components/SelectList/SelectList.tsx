@@ -47,7 +47,6 @@ const SelectList = forwardRef<SelectListHandles, SelectListProps>(
     }, [value]);
 
     function handleSearchUpdated(search: string | undefined) {
-      console.log("search updated", search);
       if (!search) {
         setMatchingOptions(options);
       } else {
@@ -114,9 +113,8 @@ const SelectList = forwardRef<SelectListHandles, SelectListProps>(
     return (
       <Input
         ref={containerRef}
-        // leftSection={}
         midSection={
-          <div className={styles.selectListContent}>
+          <div className={styles["select-list"]}>
             <input
               ref={inputRef}
               type="text"
@@ -132,9 +130,9 @@ const SelectList = forwardRef<SelectListHandles, SelectListProps>(
         }
         rightSection={clearIcon}
       >
-        <div className={styles.selectListOptionContainerPositioning}>
+        <div className={styles["select-list__options-container"]}>
           <div
-            className={styles.selectListOptionContainer}
+            className={styles["select-list__options"]}
             style={{ visibility: focused ? "visible" : "hidden" }}
           >
             {matchingOptions
@@ -142,12 +140,14 @@ const SelectList = forwardRef<SelectListHandles, SelectListProps>(
               .map((option) => (
                 <div
                   key={option}
-                  className={styles.selectListOption}
+                  className={styles["select-list__option"]}
                   onClick={() => handleOptionClicked(option)}
                 >
                   <span>{option}</span>
                   {selected.includes(option) && (
-                    <IconCheck className={styles.selectListOpenChecked} />
+                    <IconCheck
+                      className={styles["select-list__option--checked-icon"]}
+                    />
                   )}
                 </div>
               ))}

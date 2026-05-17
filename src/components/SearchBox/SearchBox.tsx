@@ -48,7 +48,7 @@ function SearchBox({
     <Input
       midSection={
         <input
-          className={styles.searchBox}
+          className={styles["search-box"]}
           type="text"
           placeholder={placeholder}
           value={searchTerm}

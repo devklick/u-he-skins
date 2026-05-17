@@ -1,7 +1,7 @@
 @use "~/common/styles/global" as *;
 @use "~/common/styles/variables" as *;
 
-.skinContainer {
+.skin {
   height: 300px;
   width: 100%;
   position: relative;
@@ -18,23 +18,25 @@
     box-shadow: 0 0 30px 8px var(--color-shadow);
   }
 
-  .imageContainer {
+  &__image-container {
     width: 100%;
     height: 100%;
     border-radius: 7px;
     position: absolute;
-
-    .skinImage {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 7px;
-    }
   }
 
-  .skinInfoContainerWrapper {
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 7px;
+  }
+
+  &__info-container {
     display: flex;
     flex-direction: column;
+    justify-content: end;
+    align-items: center;
     height: 100%;
     width: 100%;
     padding: $spacing-sm;
@@ -45,15 +47,6 @@
 
     @include md {
       padding: $spacing-xl;
-    }
-
-    .skinInfoContainer {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: end;
-      height: 100%;
-      width: 100%;
     }
   }
 }

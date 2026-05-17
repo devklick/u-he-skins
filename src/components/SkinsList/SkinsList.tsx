@@ -10,7 +10,7 @@ interface SkinTableProps {
 
 function SkinsList({ skins }: SkinTableProps) {
   return (
-    <div className={styles.skinsList}>
+    <div className={styles["skins-list"]}>
       {skins
         .slice(0, import.meta.env.VITE_SKINS_COUNT_LIMIT ?? skins.length)
         .map((skin) => (

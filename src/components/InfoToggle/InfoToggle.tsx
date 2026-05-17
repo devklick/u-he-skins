@@ -14,11 +14,11 @@ function InfoToggle({ handleClick }: InfoToggleProps) {
       withBorder
       handleClick={handleClick}
       className={{
-        button: styles.infoToggleActionButton,
-        container: styles.infoToggleActionButtonContainer,
+        button: styles["info-toggle"],
+        container: styles["info-toggle__container"],
       }}
     >
-      <IconInfoCircleFilled className={styles.infoToggleIcon} />
+      <IconInfoCircleFilled className={styles["info-toggle__icon"]} />
     </ActionButton>
   );
 }

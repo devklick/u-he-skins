@@ -42,7 +42,7 @@ function App() {
   }
 
   return (
-    <div className={styles.appContainer}>
+    <div className={styles["app"]}>
       <PageHeader />
       {loading && <Loader />}
       {!loading && (

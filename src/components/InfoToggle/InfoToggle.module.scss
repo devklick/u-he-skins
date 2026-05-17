@@ -2,18 +2,18 @@
 @use "~/common/styles/global" as *;
 @use "sass:color";
 
-.infoToggleActionButtonContainer {
-  position: absolute;
-  right: $spacing-sm;
-  top: $spacing-sm;
+.info-toggle {
+  &__container {
+    position: absolute;
+    right: $spacing-sm;
+    top: $spacing-sm;
 
-  @include sm {
-    right: $spacing-md;
-    top: $spacing-md;
+    @include sm {
+      right: $spacing-md;
+      top: $spacing-md;
+    }
   }
-}
-.infoToggleActionButton {
-  .infoToggleIcon {
+  &__icon {
     fill: var(--color-primary);
     stroke: none;
   }

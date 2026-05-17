@@ -15,22 +15,20 @@ const Skin = forwardRef<HTMLDivElement, SkinProps>(
     const hasImages = previews.some((p) => p.url && isImagePath(p.url));
 
     return (
-      <div className={styles.skinContainer} ref={ref}>
-        <div className={styles.imageContainer}>
+      <div className={styles["skin"]} ref={ref}>
+        <div className={styles["skin__image-container"]}>
           {/* TODO: Consider creating a carousel or giving some way to view multiple images */}
           {hasImages && (
-            <img className={styles.skinImage} src={previews[0].url} />
+            <img className={styles["skin__image"]} src={previews[0].url} />
           )}
         </div>
 
-        <div className={styles.skinInfoContainerWrapper}>
-          <div className={styles.skinInfoContainer}>
-            {showInfo && (
-              <SkinInfo
-                {...{ author, description, device, downloads, name, previews }}
-              />
-            )}
-          </div>
+        <div className={styles["skin__info-container"]}>
+          {showInfo && (
+            <SkinInfo
+              {...{ author, description, device, downloads, name, previews }}
+            />
+          )}
           <InfoToggle handleClick={toggleShowInfo}></InfoToggle>
         </div>
       </div>

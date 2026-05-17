@@ -1,7 +1,7 @@
 @use "./common/styles/global.scss" as *;
 @use "./common/styles/variables.scss" as *;
 
-.appContainer {
+.app {
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -10,7 +10,7 @@ interface TagsProps {
 function Tags({ tags, onDeleteTag }: TagsProps) {
   if (!tags.length) return null;
   return (
-    <div className={styles.tags}>
+    <div className={styles["tags"]}>
       {tags.map((tag) => (
         <Tag key={tag} text={tag} onClickDelete={() => onDeleteTag(tag)} />
       ))}

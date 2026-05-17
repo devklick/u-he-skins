@@ -36,31 +36,27 @@ function SkinInfo({
   name,
   previews,
 }: SkinInfoProps) {
-  const header = (
-    <div className={styles.headerContainer}>
-      <span className={styles.primaryHeader}>{name}</span>
-      <span className={styles.secondaryHeader}>
-        {tryAnchor(device)} theme by {tryAnchor(author)}
-      </span>
-    </div>
-  );
-  const descriptionBox = (
-    <div className={styles.descriptionContainer}>
-      <span className={styles.description}>{description}</span>
-    </div>
-  );
-  const iconsElements = (
-    <div className={styles.iconContainer}>
-      {getActionIcons("image", previews)}
-      {getActionIcons("download", downloads)}
-    </div>
-  );
   return (
-    <div className={styles.skinInfoContainer}>
-      <div className={styles.skinInfo}>
-        {header}
-        {descriptionBox}
-        {iconsElements}
+    <div className={styles["skin-info__container"]}>
+      <div className={styles["skin-info"]}>
+        <div className={styles["skin-info__headers"]}>
+          {/* headers */}
+          <span className={styles["skin-info__header"]}>{name}</span>
+          <span className={styles["skin-info__sub-header"]}>
+            {tryAnchor(device)} theme by {tryAnchor(author)}
+          </span>
+        </div>
+        {/* description */}
+        <div className={styles["skin-info__description-container"]}>
+          <span className={styles["skin-info__description"]}>
+            {description}
+          </span>
+        </div>
+        {/* icons */}
+        <div className={styles["skin-info__icons"]}>
+          {getActionIcons("image", previews)}
+          {getActionIcons("download", downloads)}
+        </div>
       </div>
     </div>
   );

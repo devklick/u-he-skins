@@ -8,10 +8,10 @@ interface TagProps {
 
 function Tag({ text, onClickDelete }: TagProps) {
   return (
-    <div className={styles.tag}>
+    <div className={styles["tag"]}>
       <span>{text}</span>
       <IconX
-        className={styles.tagDeleteIcon}
+        className={styles["tag__delete-icon"]}
         onClick={onClickDelete}
         size={10}
       />

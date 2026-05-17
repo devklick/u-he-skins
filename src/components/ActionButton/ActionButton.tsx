@@ -23,21 +23,17 @@ function ActionButton({
   className,
   withBorder,
 }: React.PropsWithChildren<ActionButtonProps>) {
-  const getClassName = (type: keyof ClassNames) => {
-    if (isClassNames(className)) {
-      return className[type];
-    }
-    return className;
-  };
+  const getClass = (type: keyof ClassNames) =>
+    isClassNames(className) ? className[type] : className;
 
-  const containerClass = getClassName("container");
-  const buttonClass = getClassName("button");
+  const containerClass = getClass("container");
+  const buttonClass = getClass("button");
 
   return (
-    <div className={clsx(styles.actionButtonContainer, containerClass)}>
+    <div className={clsx(styles["action-button__container"], containerClass)}>
       <button
-        className={clsx(styles.actionButton, buttonClass, {
-          [styles["actionButton--bordered"]]: withBorder,
+        className={clsx(styles["action-button"], buttonClass, {
+          [styles["action-button--bordered"]]: withBorder,
         })}
         onClick={handleClick}
       >
