@@ -1,7 +1,8 @@
 import { IconInfoCircleFilled } from "@tabler/icons-react";
 
-import styles from "./InfoToggle.module.scss";
 import ActionButton from "../ActionButton";
+
+import styles from "./InfoToggle.module.scss";
 
 interface InfoToggleProps {
   handleClick(): void;

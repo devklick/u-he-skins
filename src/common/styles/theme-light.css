@@ -1,7 +1,8 @@
 [data-theme="light"] {
   --color-bg: #cecece;
   --color-text: #272727;
-  --color-shadow: #61616188;
-  --color-opaque: #88888880;
+  --color-shadow: #3b3e3f88;
+  --color-opaque: #8b8b8b80;
   --color-primary: #848ead;
+  --gradient-primary: linear-gradient(#e8e8e998, rgba(65, 56, 196, 0.178));
 }

@@ -35,7 +35,7 @@ const Skin = forwardRef<HTMLDivElement, SkinProps>(
         </div>
       </div>
     );
-  }
+  },
 );
 
 export default Skin;

@@ -1,30 +1,32 @@
 @use "~/common/styles/global" as *;
 @use "~/common/styles/variables" as *;
 
-.skinInfo {
-  display: flex;
-  flex-direction: column;
+.skinInfoContainer {
   width: 100%;
-  height: 80%;
+  height: 60%;
   backdrop-filter: blur(20px);
-  border-radius: 20px;
-  border: 1px solid grey;
-  padding: $spacing-lg;
-  box-shadow: 0 0px 40px 15px var(--color-shadow);
   background-color: var(--color-opaque);
+  border-radius: 20px;
 
   @include sm {
     width: 70%;
-    height: 60%;
-  }
-
-  @include md {
-    padding: $spacing-xl;
   }
 
   @include lg {
     width: 50%;
   }
+}
+.skinInfo {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: $spacing-lg;
+  box-shadow: 0 0px 40px 15px var(--color-shadow);
+  background: var(--gradient-primary);
+  border-radius: 20px;
+  mix-blend-mode: multiply;
+  border: 1px solid grey;
 
   .headerContainer {
     display: flex;

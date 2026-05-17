@@ -56,10 +56,12 @@ function SkinInfo({
     </div>
   );
   return (
-    <div className={styles.skinInfo}>
-      {header}
-      {descriptionBox}
-      {iconsElements}
+    <div className={styles.skinInfoContainer}>
+      <div className={styles.skinInfo}>
+        {header}
+        {descriptionBox}
+        {iconsElements}
+      </div>
     </div>
   );
 }

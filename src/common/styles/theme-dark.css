@@ -1,7 +1,8 @@
 :root {
-  --color-bg: #222226;
+  --color-bg: #242446;
   --color-text: #cecece;
-  --color-shadow: #0f0f0f;
-  --color-opaque: #20202480;
-  --color-primary: #545d6d;
+  --color-shadow: #1d1642a4;
+  --color-opaque: #6954d126;
+  --color-primary: #5e4972;
+  --gradient-primary: linear-gradient(rgba(0, 0, 255, 0.178), rgba(255, 0, 0, 0.178));
 }

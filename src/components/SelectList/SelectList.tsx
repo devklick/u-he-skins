@@ -1,4 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import {
+  forwardRef,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from "react";
 import { IconBackspace, IconCheck } from "@tabler/icons-react";
 
 import useDetectMouseDownOutside from "../../common/hooks/useDetectMouseDownOutside";
@@ -8,6 +14,10 @@ import Tags from "../Tags";
 
 import styles from "./SelectList.module.scss";
 
+export interface SelectListHandles {
+  close: VoidFunction;
+  element: HTMLDivElement | null;
+}
 interface SelectListProps {
   placeholder?: string;
   options: Array<string>;
@@ -15,134 +25,145 @@ interface SelectListProps {
   value?: Array<string>;
 }
 
-function SelectList({
-  onSelectionUpdated,
-  options,
-  placeholder,
-  value,
-}: SelectListProps) {
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const inputRef = useRef<HTMLInputElement | null>(null);
-  const [selected, setSelected] = useState<Array<string>>(value ?? []);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [focused, setFocused] = useState(false);
-  const [matchingOptions, setMatchingOptions] = useState<Array<string>>([
-    ...options,
-  ]);
+const SelectList = forwardRef<SelectListHandles, SelectListProps>(
+  ({ onSelectionUpdated, options, placeholder, value }, ref) => {
+    const containerRef = useRef<HTMLDivElement | null>(null);
+    const inputRef = useRef<HTMLInputElement | null>(null);
+    const [selected, setSelected] = useState<Array<string>>(value ?? []);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [focused, setFocused] = useState(false);
+    const [matchingOptions, setMatchingOptions] = useState<Array<string>>([
+      ...options,
+    ]);
 
-  useEffect(() => {
-    setSelected(value ?? []);
-  }, [value]);
+    const handleClose = () => setFocused(false);
+    useImperativeHandle(ref, () => ({
+      close: handleClose,
+      element: containerRef.current,
+    }));
 
-  function handleSearchUpdated(search: string | undefined) {
-    console.log("search updated", search);
-    if (!search) {
-      setMatchingOptions(options);
-    } else {
-      setMatchingOptions(
-        options.filter((o) => o.toUpperCase().includes(search.toUpperCase())),
-      );
+    useEffect(() => {
+      setSelected(value ?? []);
+    }, [value]);
+
+    function handleSearchUpdated(search: string | undefined) {
+      console.log("search updated", search);
+      if (!search) {
+        setMatchingOptions(options);
+      } else {
+        setMatchingOptions(
+          options.filter((o) => o.toUpperCase().includes(search.toUpperCase())),
+        );
+      }
+
+      setSearchTerm(search ?? "");
     }
 
-    setSearchTerm(search ?? "");
-  }
+    useDetectMouseDownOutside({
+      elementRef: containerRef,
+      onMouseDown: () => setFocused(false),
+    });
 
-  useDetectMouseDownOutside({
-    elementRef: containerRef,
-    onMouseDown: () => setFocused(false),
-  });
+    useEffect(() => {
+      const handler = (event: KeyboardEvent) => {
+        if ((focused && event.key === "Escape") || event.key === "Tab") {
+          setFocused(false);
+        }
+      };
+      window.addEventListener("keydown", handler);
+      return () => {
+        window.removeEventListener("keydown", handler);
+      };
+    });
 
-  useEffect(() => {
-    const handler = (event: KeyboardEvent) => {
-      if ((focused && event.key === "Escape") || event.key === "Tab") {
-        setFocused(false);
-      }
-    };
-    window.addEventListener("keydown", handler);
-    return () => {
-      window.removeEventListener("keydown", handler);
-    };
-  });
-
-  function selectOption(option: string) {
-    const newSelected = [...selected, option];
-    setSelected(newSelected);
-    onSelectionUpdated(newSelected);
-  }
-
-  function deselectOption(option: string) {
-    const i = selected.indexOf(option);
-    const newSelected = [...selected];
-    newSelected.splice(i, 1);
-    setSelected(newSelected);
-    onSelectionUpdated(newSelected);
-  }
-
-  function handleOptionClicked(option: string) {
-    if (selected.includes(option)) {
-      deselectOption(option);
-    } else {
-      selectOption(option);
+    function selectOption(option: string) {
+      const newSelected = [...selected, option];
+      setSelected(newSelected);
+      onSelectionUpdated(newSelected);
     }
-  }
 
-  const clearIcon = (
-    <ActionButton
-      handleClick={() => {
-        setSearchTerm("");
-        setSelected([]);
-        onSelectionUpdated([]);
-      }}
-      withBorder={false}
-    >
-      <IconBackspace />
-    </ActionButton>
-  );
+    function deselectOption(option: string) {
+      const i = selected.indexOf(option);
+      const newSelected = [...selected];
+      newSelected.splice(i, 1);
+      setSelected(newSelected);
+      onSelectionUpdated(newSelected);
+    }
 
-  return (
-    <Input
-      ref={containerRef}
-      // leftSection={}
-      midSection={
-        <div className={styles.selectListContent}>
-          <input
-            ref={inputRef}
-            type="text"
-            placeholder={selected.length ? undefined : placeholder}
-            value={searchTerm}
-            onChange={(e) => handleSearchUpdated(e.currentTarget.value)}
-            onFocus={() => setFocused(true)}
-            onClick={() => setFocused(true)}
-            onKeyDown={() => setFocused(true)}
-          />
-          <Tags tags={selected} onDeleteTag={(tag) => deselectOption(tag)} />
-        </div>
+    function handleOptionClicked(option: string) {
+      if (selected.includes(option)) {
+        deselectOption(option);
+      } else {
+        selectOption(option);
       }
-      rightSection={clearIcon}
-    >
-      <div className={styles.selectListOptionContainerPositioning}>
-        <div
-          className={styles.selectListOptionContainer}
-          style={{ visibility: focused ? "visible" : "hidden" }}
-        >
-          {matchingOptions
-            .sort((a, b) => a.localeCompare(b))
-            .map((option) => (
-              <div
-                key={option}
-                className={styles.selectListOption}
-                onClick={() => handleOptionClicked(option)}
-              >
-                <span>{option}</span>
-                {selected.includes(option) && (
-                  <IconCheck className={styles.selectListOpenChecked} />
-                )}
-              </div>
-            ))}
+    }
+
+    const clearIcon = (
+      <ActionButton
+        handleClick={() => {
+          setSearchTerm("");
+          setSelected([]);
+          onSelectionUpdated([]);
+        }}
+        withBorder={false}
+      >
+        <IconBackspace />
+      </ActionButton>
+    );
+
+    return (
+      <Input
+        ref={containerRef}
+        // leftSection={}
+        midSection={
+          <div className={styles.selectListContent}>
+            <input
+              ref={inputRef}
+              type="text"
+              placeholder={selected.length ? undefined : placeholder}
+              value={searchTerm}
+              onChange={(e) => handleSearchUpdated(e.currentTarget.value)}
+              onFocus={() => setFocused(true)}
+              onClick={() => setFocused(true)}
+              onKeyDown={() => setFocused(true)}
+            />
+            <Tags tags={selected} onDeleteTag={(tag) => deselectOption(tag)} />
+          </div>
+        }
+        rightSection={clearIcon}
+      >
+        <div className={styles.selectListOptionContainerPositioning}>
+          <div
+            className={styles.selectListOptionContainer}
+            style={{ visibility: focused ? "visible" : "hidden" }}
+          >
+            {matchingOptions
+              .sort((a, b) => a.localeCompare(b))
+              .map((option) => (
+                <div
+                  key={option}
+                  className={styles.selectListOption}
+                  onClick={() => handleOptionClicked(option)}
+                >
+                  <span>{option}</span>
+                  {selected.includes(option) && (
+                    <IconCheck className={styles.selectListOpenChecked} />
+                  )}
+                </div>
+              ))}
+          </div>
         </div>
-      </div>
-    </Input>
-  );
-}
+      </Input>
+    );
+  },
+);
+
+// function SelectList({
+//   onSelectionUpdated,
+//   options,
+//   placeholder,
+//   value,
+//   open,
+// }: SelectListProps) {}
 
 export default SelectList;

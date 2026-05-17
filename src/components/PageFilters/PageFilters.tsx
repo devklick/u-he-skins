@@ -4,6 +4,7 @@ import SelectList from "../SelectList";
 
 import styles from "./PageFilters.module.scss";
 import clsx from "clsx";
+import { SelectListHandles } from "../SelectList/SelectList";
 
 interface PageFiltersProps {
   availableDevices: Array<string>;
@@ -24,6 +25,7 @@ function PageFilters({
   const pageFiltersRef = useRef<HTMLDivElement>(null);
   const [stuck, setStuck] = useState(false);
   const [hidden, setHidden] = useState(false);
+  const selectListRef = useRef<SelectListHandles>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -46,7 +48,10 @@ function PageFilters({
       const delta = currentY - lastY;
 
       if (Math.abs(delta) > 5) {
-        setHidden(delta > 0);
+        const hide = delta > 0;
+        setHidden(hide);
+
+        if (hide) selectListRef.current?.close();
       }
       lastY = currentY;
     };
@@ -72,6 +77,7 @@ function PageFilters({
           value={searchTerm}
         />
         <SelectList
+          ref={selectListRef}
           placeholder="Device"
           options={availableDevices}
           onSelectionUpdated={onDevicesUpdated}
